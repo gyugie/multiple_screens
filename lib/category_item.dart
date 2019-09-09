@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
 class CategoryItem extends StatelessWidget {
-  final title;
-  final color;
+  final String title;
+  final Color color;
 
-  CategoryItem({this.title, this.color});
+  CategoryItem(this.title, this.color);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       child: Text(title),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            color.withOpacity(0,7),
+            color.withOpacity(0.7),
             color,
           ],
             begin: Alignment.topLeft,
