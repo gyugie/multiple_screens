@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multiple_screens/widgets/main_drawer.dart';
 import './category_screens.dart';
 import './favorite_meals.dart';
 
@@ -33,6 +34,7 @@ void _selectedPage(int index){
           appBar: AppBar(
             title: Text(_pages[_selectedPageIndex]['title']),
           ),
+          drawer: MainDrawer(),
           body: _pages[_selectedPageIndex]['page'],
           bottomNavigationBar: BottomNavigationBar(
             onTap: _selectedPage,
