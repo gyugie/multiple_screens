@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import '../widgets/main_drawer.dart';
 
 class FiltersScreen extends StatefulWidget {
-   static const routeName = 'Filters';
+  static const routeName = 'Filters';
+  
+  final Function saveFilters;
+  final Map<String, bool> currentFilters;
+
+  FiltersScreen(this.currentFilters, this.saveFilters);
 
   @override
   _FiltersScreenState createState() => _FiltersScreenState();
@@ -14,18 +19,26 @@ class _FiltersScreenState extends State<FiltersScreen> {
    bool _isVegetarian = false;
    bool _isLactoseFree = false;
 
+   @override
+   initState(){
+     _isGlutenFree = widget.currentFilters['gluten'];
+     _isLactoseFree = widget.currentFilters['lactose'];
+     _isVegan = widget.currentFilters['vegan'];
+     _isVegetarian = widget.currentFilters['vegetarian'];
+   }
+
    Widget _buildSwitchListTile(
      String title, 
      String description, 
      bool currentValue, 
      Function updateValue
      ){
-          return SwitchListTile(
-                  title: Text(title,  style: TextStyle(fontWeight: FontWeight.bold)),
-                  value: currentValue,
-                  subtitle: Text(description, style: TextStyle(fontFamily: 'RobotoCondensed')),
-                  onChanged: updateValue,
-                );
+        return SwitchListTile(
+                title: Text(title,  style: TextStyle(fontWeight: FontWeight.bold)),
+                value: currentValue,
+                subtitle: Text(description, style: TextStyle(fontFamily: 'RobotoCondensed')),
+                onChanged: updateValue,
+              );
    }
 
   @override
@@ -33,6 +46,21 @@ class _FiltersScreenState extends State<FiltersScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Filters'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.save),
+            onPressed: (){
+              final selectedFilter = {
+                  'gluten': _isGlutenFree,
+                  'lactose': _isLactoseFree,
+                  'vegan': _isVegan,
+                  'vegetarian': _isVegetarian
+                };
+
+              widget.saveFilters(selectedFilter);
+            } ,
+          ),
+        ],
       ),
       drawer: MainDrawer(),
       body: Column(
