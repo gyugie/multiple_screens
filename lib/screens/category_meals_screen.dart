@@ -24,7 +24,6 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
   @override
   void didChangeDependencies(){
         if(_loadedData == false){
-          print(_loadedData);
             final routesArgs = ModalRoute.of(context).settings.arguments as Map<String, String>;
               categoryTitle = routesArgs['title'];
             final categoryId  = routesArgs['id'];
@@ -33,7 +32,6 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
             }).toList();  
           _loadedData = true;
         }
-print('hi');
         super.didChangeDependencies();
   }
 
